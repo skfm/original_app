@@ -38,13 +38,13 @@ function insert($sql, $arr = [])
 // @param string $sql
 // @param array $arr
 // @return array $rows
-// function select($sql, $arr = [])
-// {
-//     $pdo = connect_db();
-//     $stmt = $pdo->prepare($sql);
-//     $stmt->execute($arr);
-//     return $stmt->fetchAll();
-// }
+function select($sql, $arr = [])
+{
+    $pdo = connect_db();
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($arr);
+    return $stmt->fetchAll();
+}
 
 // delete
 // @param string $sql

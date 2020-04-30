@@ -1,8 +1,10 @@
 <?php
 
+session_start();
+
 require_once(__DIR__ . '/common.php');
 
-session_start();
+
 
 $err = [];
 
@@ -72,14 +74,6 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
    <?php if (isset($success)) : ?>
      <p class="error"><?= h($success); ?></p>
    <?php endif; ?>
-   <h1>ようこそ、ログインしてください。</h1>
-   <form  action="login.php" method="post">
-     <label for="email">メールアドレス</label>
-     <input type="email" name="email">
-     <label for="password">パスワード</label>
-     <input type="password" name="password">
-     <button type="submit">ログイン</button>
-   </form>
    <h1>初めての方はこちら</h1>
    <form action="signUp.php" method="post">
      <label for="name">名前</label>
