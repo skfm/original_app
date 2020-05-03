@@ -25,21 +25,18 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     $arr = [];
     $arr[':mail'] = $mail;
     $rows = select($sql, $arr);
-
-    // パスワード検証
-    foreach ($rows as $row) {
-      $password_hash = $row['password'];
-
-      // パスワード一致
-      if (password_verify($password, $password_hash)) {
-        session_regenerate_id(true);
-        $_SESSION['login_user'] = $row;
-        header('Location: http://localhost/php/original_app/index.php');
-        exit();
-      }
+    $row = reset($rows);
+    $password_hash = $row['password'];
+    // パスワード一致
+    if (password_verify($password, $password_hash)) {
+      session_regenerate_id(true);
+      $_SESSION['login_user'] = $row;
+      header('Location: http://localhost/php/original_app/index.php');
+      exit();
     }
-    $errors['login'] = 'ログインに失敗しました。';
   }
+
+  $errors['login'] = 'ログインに失敗しました。';
 }
 
 ?>
