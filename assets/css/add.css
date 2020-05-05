@@ -1,0 +1,155 @@
+@charset;
+
+/* 共通 */
+/* レアアウト */
+.main-panel > .content {
+  padding: 0px 15px;
+}
+
+.card {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+}
+
+/* フォーム画面*/
+.card .card-body .form-group {
+  margin: 25px 0 0;
+}
+
+.card .card-body .form-group:nth-child(1) {
+  margin-top: 40px;
+}
+
+.form-group .bmd-label-static {
+  top: -20px;
+}
+
+.form-control {
+  padding-left: 5px;
+}
+
+.form-group input[type="file"] {
+  opacity: 1;
+  position: initial;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: initial;
+}
+
+input.submit {
+  display: block;
+  max-width: 200px;
+  width: 200px;
+  margin: 10px auto;
+}
+
+/* フォーム画面*/
+/* edit */
+/* delete */
+form.edit,
+form.delete {
+  padding: 10px 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+  background-color: #fff;
+}
+
+form.edit .form-group,
+form.delete .form-group {
+  margin: 25px 0 0;
+}
+
+form.edit .form-group:nth-child(1),
+form.edit .form-group:nth-child(2),
+form.delete .form-group:nth-child(1) {
+  margin: 10px 0 0;
+}
+
+/* アラート */
+.alert.col-md-12 {
+  margin-top: 20px;
+  padding: 0;
+}
+
+/* 管理画面の調整 */
+/* signup */
+/* login */
+.signup .col-md-6,
+.login .col-md-6 {
+  margin: auto;
+}
+
+/* delete */
+.is-focused .bmd-label-floating,
+.is-filled .bmd-label-floating {
+  top: -25px;
+  left: 0;
+  font-size: 0.6875rem;
+}
+
+/* admin */
+.admin .container {
+  background: #eee;
+  overflow: hidden;
+  width: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  .admin .table thead tr th {
+    font-size: 12px;
+  }
+
+  .admin .table > thead > tr > th,
+  .admin .table > tbody > tr > th,
+  .admin .table > tfoot > tr > th,
+  .admin .table > thead > tr > td,
+  .admin .table > tbody > tr > td,
+  .admin .table > tfoot > tr > td {
+    padding: 5px;
+    vertical-align: middle;
+    border-color: #ddd;
+    text-align: center !important;
+    overflow: hidden;
+    width: 10%;
+    max-width: 150px;
+  }
+
+  .admin .table > thead > tr > td > span,
+  .admin .table > tbody > tr > td > span,
+  .admin .table > tfoot > tr > td > span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+  }
+
+  .admin .table > tbody > tr > td:nth-child(1) {
+    max-width: 40px;
+  }
+
+  .admin .table > tbody > tr > td:nth-child(2) {
+    max-width: 80px;
+  }
+
+  .admin .card .card-body {
+    padding: 0.9375rem 10px;
+  }
+
+  .admin .col-md-12 {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .admin .delete.btn {
+    padding: 5px;
+  }
+}

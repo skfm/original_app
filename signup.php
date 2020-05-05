@@ -31,7 +31,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     }
 
     //メールアドレスのValidate
-    if (!$mail = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+    if (!$mail = filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
       $e = e('正しいメールアドレスを入力してください。', $e);
     }
 
@@ -74,31 +74,92 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+
+  <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="assets/css/add.css" rel="stylesheet" />
+  <title>新規登録</title>
 </head>
-<body>
-  <?php if (isset($errors)) : ?>
-    <?php foreach ($errors as $error) : ?>
-      <p class="error"><?= h($error); ?></p>
-    <?php endforeach ; ?>
-  <?php endif; ?>
-  <?php if (isset($success)) : ?>
-    <p class="error"><?= h($success); ?></p>
-    <a href="http://localhost/php/original_app/index.php">ログインする</a>
-  <?php endif; ?>
-  <h1>初めての方はこちら</h1>
-  <form action="signUp.php" method="post">
-    <label for="name">名前</label>
-    <input type="text" name="name">
-    <label for="email">メールアドレス</label>
-    <input type="email" name="email">
-    <label for="password">パスワード</label>
-    <input type="password" name="password">
-    <label for="password_conf">確認用パスワード</label>
-    <input type="password" name="password_conf">
-    <button type="submit">登録</button>
-    <p>※パスワードは半角英数字をそれぞれ１文字以上含んだ、８文字以上で設定してください。</p>
-  </form>
+<body class="signup">
+  <div class="wrapper">
+    <div class="content">
+      <div class="container">
+        <?php if (isset($errors)) : ?>
+          <div class="alert col-md-12">
+            <div class="alert alert-danger" role="alert">
+              <?php foreach ($errors as $error) : ?>
+                <p class="error"><?= h($error); ?></p>
+              <?php endforeach ; ?>
+            </div>
+          </div>
+        <?php endif; ?>
+        <?php if (isset($success)) : ?>
+          <div class="alert col-md-12">
+            <div class="alert alert-success" role="alert">
+                <p class="success"><?= h($success); ?></p>
+                <a href="http://localhost/php/original_app/index.php">ログインする</a>
+            </div>
+          </div>
+        <?php endif; ?>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">アプリ名 新規登録</h4>
+                <form action="" method="post">
+                  <div class="form-group">
+                    <label for="name">名前</label>
+                    <input type="text" name="name" class="form-control" placeholder="名前を入力してください">
+                  </div>
+                  <div class="form-group">
+                    <label for="mail">メールアドレス</label>
+                    <input type="email" class="form-control" name="mail" aria-describedby="emailHelp" placeholder="メールアドレスを入力してください">
+                  </div>
+                  <div class="form-group">
+                    <label for="password">パスワード</label>
+                    <input type="password" class="form-control" name="password" placeholder="パスワードを入力してください">
+                  </div>
+                  <div class="form-group">
+                    <label for="password_conf">確認用パスワード</label>
+                    <input type="password" class="form-control" name="password_conf" placeholder="確認用パスワードを入力してください">
+                  </div>
+                  <p>パスワードは半角英数字をそれぞれ1文字以上含んだ8文字以上で設定してください。</p>
+                  <input type="submit" name="btn_submit" value="新規登録" class="submit btn btn-warning">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer">
+        <div class="container-fluid">
+          <div class="copyright">
+            ©
+            <script>
+              document.write(new Date().getFullYear())
+            </script> made with <i class="material-icons">favorite</i> by
+            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+          </div>
+        </div>
+      </footer>
+        <!-- <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -503.2px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 503.2px; right: 0px; height: 399px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 171px; height: 136px;"></div></div></div> -->
+    </div>
+  </div>
+  <!--   Core JS Files   -->
+  <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/popper.min.js" type="text/javascript"></script>
+  <script src="assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
+  <script src="assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+
+  <!--  Notifications Plugin    -->
+  <script src="assets/js/plugins/bootstrap-notify.js"></script>
+
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="assets/js/material-dashboard.min.js?v=2.1.0" type="text/javascript"></script>
+  <script src="assets/js/main.js" type="text/javascript"></script>
 </body>
 </html>
