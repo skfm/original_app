@@ -49,19 +49,7 @@ function select($sql, $arr = [])
 // edit
 // @param string $sql
 // @param array $arr
-function edit($sql, $arr = [])
-{
-    $pdo = connect_db();
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($arr);
-    return;
-}
-
-// delete
-// @param string $sql
-// @param array $arr
-// @return array $rows
-function delete($sql, $arr = [])
+function common($sql, $arr = [])
 {
     $pdo = connect_db();
     $stmt = $pdo->prepare($sql);
@@ -143,7 +131,7 @@ function img_text_register() {
         $arr[':text'] = $text;
         $arr[':id'] = $id;
         $arr[':img_path'] = $destination;
-        $rows = edit($sql, $arr);
+        $rows = common($sql, $arr);
 
     } else {
 
@@ -156,7 +144,7 @@ function img_text_register() {
         $arr[':name'] = $name;
         $arr[':text'] = $text;
         $arr[':id'] = $id;
-        $rows = edit($sql, $arr);
+        $rows = common($sql, $arr);
     }
 
 

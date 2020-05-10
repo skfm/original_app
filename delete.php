@@ -26,7 +26,7 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
     $sql = 'DELETE FROM user_data WHERE id = :id';
     $arr = [];
     $arr[':id'] = $id;
-    $rows = delete($sql, $arr);
+    $rows = common($sql, $arr);
 
     $url = "http://localhost/php/original_app/signup.php";
     header("Location:" . $url);
