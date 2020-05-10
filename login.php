@@ -24,14 +24,15 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     $sql = "SELECT * FROM user_data WHERE mail = :mail";
     $arr = [];
     $arr[':mail'] = $mail;
-    $rows = select($sql, $arr);
+    $rows_object = new SqlExecutor();
+    $rows = $rows_object->select($sql, $arr);
     $row = reset($rows);
     $password_hash = $row['password'];
     // パスワード一致
     if (password_verify($password, $password_hash)) {
       session_regenerate_id(true);
       $_SESSION['login_user'] = $row;
-      header('Location: http://localhost/php/original_app/index.php');
+      header('Location: http://localhost/php/original_app/user-admin.php');
       exit();
     }
   }
@@ -95,8 +96,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             ©
             <script>
               document.write(new Date().getFullYear())
-            </script> made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </script> made with <i class="material-icons">favorite</i> by Creative Maverick
           </div>
         </div>
       </footer>

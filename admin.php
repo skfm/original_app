@@ -12,7 +12,8 @@ try {
 
   $sql = 'SELECT id, name, mail FROM user_data';
   $arr = [];
-  $rows = select($sql, $arr);
+  $rows_object = new SqlExecutor();
+  $rows = $rows_object->select($sql, $arr);
  
 } catch (Exception $e) {
 
@@ -122,12 +123,11 @@ try {
         </div>
       <footer class="footer">
         <div class="container-fluid">
-          <div class="copyright float-right">
+          <div class="copyright">
             ©
             <script>
               document.write(new Date().getFullYear())
-            </script> made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </script> made with <i class="material-icons">favorite</i> by Creative Maverick
           </div>
         </div>
       </footer>

@@ -1,24 +1,3 @@
-<?php
-
-session_start();
-
-require_once(__DIR__ . '/common.php');
-
-try {
-  $id = $_SESSION['login_user']['id'];
-
-  $sql = 'SELECT id, name FROM user_data WHERE id = :id';
-  $arr = [];
-  $arr[':id'] = $id;
-  $rows = select($sql, $arr);
-  $row = reset($rows);
-} catch (Exception $e) {
-
-  $error = $e->getMessage();
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -31,123 +10,49 @@ try {
 
   <link href="assets/css/material-dashboard.css?v=2.1.0" rel="stylesheet" />
   <link href="assets/css/add.css" rel="stylesheet" />
-  <title>Login</title>
+  <title>アプリ名</title>
 </head>
 <body class="index">
-<div class="wrapper">
-    <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-        Tip 2: you can also add an image using data-image tag
-    -->
-      <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-normal">
-          アプリ名
-        </a></div>
-      <div class="sidebar-wrapper ps-container ps-theme-default" data-ps-id="54c5e70f-1292-ed79-06c8-ac070c19f468">
-        <ul class="nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="./index.php">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="http://localhost/php/original_app/edit.php?id=<?= h($row['id']); ?>">
-            <i class="material-icons">edit</i>
-              <p>結果の登録または編集</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="http://localhost/php/original_app/result.php?id=<?= h($row['id']); ?>">
-              <i class="material-icons">phone_iphone</i>
-              <p>結果の確認</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="http://localhost/php/original_app/logout.php">
-              <i class="material-icons">undo</i>
-              <p>ログアウト</p>
-            </a>
-          </li>
-          <li class="nav-item active-pro">
-            <a class="nav-link" href="http://localhost/php/original_app/delete.php?id=<?= h($row['id']); ?>">
-              <i class="material-icons">delete</i>
-              <p>退会</p>
-            </a>
-          </li>
-        </ul>
-      <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
-    <div class="sidebar-background" style="background-image: url(../assets/img/sidebar-1.jpg) "></div></div>
-    <div class="main-panel ps-container ps-theme-default ps-active-y" data-ps-id="55c276fd-4544-2436-6fe2-f3ca07d3de6b">
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-        <div class="container-fluid">
-          <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">Dashboard</a>
-          </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-            <span class="navbar-toggler-icon icon-bar"></span>
-          </button>
-        </div>  
-      </nav>
-      <!-- End Navbar -->
-      <div class="content">
-        <div class="container">
-          <?php if (isset($error)) : ?>
-            <div class="alert col-md-12">
-              <div class="alert alert-success" role="alert">
-                <p class="error"><?= h($error); ?></p>
-              </div>
-            </div>
-          <?php endif; ?>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">アプリの使い方</h4>
-                  <p class="card-text">
-                    アプリの使い方の説明を入力する。
-                  </p>
+  <div class="wrapper">
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h4 class="card-title">アプリ名</h4>
+                <div class="main-visula">
+                  <img src="../original_app/assets/img/fun-at-carnival.jpg" alt="笑っている女性">
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title"><?= h($row['name']); ?>さん専用 質問URL</h4>
-                  <p class="card-text">
-                    下記の表示されているURLをコピーするか、<br>
-                    クリップボードをクリックしてコピーしてください。
-                  </p>
-                  <p id="copyTarget" class="card-text">
-                    http://localhost/php/original_app/question.php?id=<?= h($row['id']); ?>
-                  </p>
-                  <button class="submit btn btn-warning" onclick="copyToClipboard()">URLをコピー</button>
+                <div class="card-desc">
+                  「アプリ名」は相性占い風ジョークアプリです。<br>
+                  使用したい相手に URL を送り質問に答えてもらうと  予め登録しているメッセージと画像が相性占い結果に表示されます。<br><br>
+                  「初対面の異性との話のネタに困っている」、「面白いことを言えずに会話が盛り上がらない」と悩んでいる人向けです。<br><br>
+                  
+                  初めての方は新規登録から登録を行い利用してください。
+                </div>
+                <div class="btn-wrapper">
+                  <a class="signup btn btn-warning" href="signup.php">新規登録</a>
+                  <a class="login btn btn-warning" href="login.php">ログイン</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
       <footer class="footer">
         <div class="container-fluid">
           <div class="copyright">
             ©
             <script>
               document.write(new Date().getFullYear())
-            </script> made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </script> made with <i class="material-icons">favorite</i> by Creative Maverick
           </div>
         </div>
       </footer>
-    <!-- <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -503.2px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 503.2px; right: 0px; height: 399px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 171px; height: 136px;"></div></div></div> -->
+        <!-- <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: -503.2px;"><div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps-scrollbar-y-rail" style="top: 503.2px; right: 0px; height: 399px;"><div class="ps-scrollbar-y" tabindex="0" style="top: 171px; height: 136px;"></div></div></div> -->
+    </div>
   </div>
-  
   <!--   Core JS Files   -->
   <script src="assets/js/core/jquery.min.js" type="text/javascript"></script>
   <script src="assets/js/core/popper.min.js" type="text/javascript"></script>

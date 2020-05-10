@@ -52,12 +52,14 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     $arr[':name'] = $name;
     $arr[':mail'] = $mail;
     $arr[':password'] = $password;
-    $lastInsertId = insert($sql, $arr);
+    $lastInsertId = new SqlExecutor();
+    $lastInsertId->common($sql, $arr);
 
     $sql = 'SELECT * FROM user_data WHERE mail = :mail';
     $arr = [];
     $arr[':mail'] = $mail;
-    $rows = select($sql, $arr);
+    $rows = new SqlExecutor();
+    $rows->select($sql, $arr);
     $row = reset($rows);
     $_SESSION['login_user'] = $row;
 
@@ -101,7 +103,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
           <div class="alert col-md-12">
             <div class="alert alert-success" role="alert">
                 <p class="success"><?= h($success); ?></p>
-                <a href="http://localhost/php/original_app/index.php">ログインする</a>
+                <a href="http://localhost/php/original_app/login.php">ログイン画面へ</a>
             </div>
           </div>
         <?php endif; ?>
@@ -141,8 +143,7 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
             ©
             <script>
               document.write(new Date().getFullYear())
-            </script> made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </script> made with <i class="material-icons">favorite</i> by Creative Maverick
           </div>
         </div>
       </footer>

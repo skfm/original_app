@@ -9,7 +9,8 @@ try {
   $sql = 'SELECT name, text, img_path FROM user_data WHERE id = :id';
   $arr = [];
   $arr[':id'] = $id;
-  $rows = select($sql, $arr);
+  $rows_object = new SqlExecutor();
+  $rows = $rows_object->select($sql, $arr);
   $row = reset($rows);
 } catch (Exception $e) {
 

@@ -15,7 +15,8 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
     $sql = 'SELECT * FROM user_data WHERE id = :id';
     $arr = [];
     $arr[':id'] = $id;
-    $rows = select($sql, $arr);
+    $rows_object = new SqlExecutor();
+    $rows = $rows_object->select($sql, $arr);
     $row = reset($rows);
   } catch (Exception $e) {
     $error = $e->getMessage();
@@ -31,7 +32,8 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
     $sql = 'SELECT * FROM user_data WHERE id = :id';
     $arr = [];
     $arr[':id'] = $id;
-    $rows = select($sql, $arr);
+    $rows = new SqlExecutor();
+    $rows->select($sql, $arr);
     $row = reset($rows);
   }
 }
@@ -166,7 +168,7 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
               <div class="form-group">
               <input type="hidden" name="id" value=<?= $_GET['id']; ?>>
               <input type="submit" name="btn_submit" value="編集する" class="btn btn-warning">
-              <a class="btn_cancel btn btn-default" href="http://localhost/php/original_app/index.php">戻る</a>
+              <a class="btn_cancel btn btn-default" href="http://localhost/php/original_app/user-admin.php">戻る</a>
               </div>
               </form>
             </div>
@@ -174,14 +176,11 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
         </div>
       <footer class="footer">
         <div class="container-fluid">
-          <nav class="float-left">
-          </nav>
-          <div class="copyright float-right">
+          <div class="copyright">
             ©
             <script>
               document.write(new Date().getFullYear())
-            </script> made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </script> made with <i class="material-icons">favorite</i> by Creative Maverick
           </div>
         </div>
       </footer>

@@ -4,38 +4,18 @@ session_start();
 
 require_once(__DIR__ . '/common.php');
 
-if( empty($_SESSION['login_user']) || $_SESSION['login_user']['id'] !== filter_input(INPUT_GET, 'id') ) {
-	header('Location: http://localhost/php/original_app/signup.php');
-}
+try {
+  $id = $_SESSION['login_user']['id'];
 
-if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id')))) {
-  try {
-    $id = $_GET['id'];
+  $sql = 'SELECT id, name FROM user_data WHERE id = :id';
+  $arr = [];
+  $arr[':id'] = $id;
+  $rows_object = new SqlExecutor();
+  $rows = $rows_object->select($sql, $arr);
+  $row = reset($rows);
+} catch (Exception $e) {
 
-    $sql = 'SELECT * FROM user_data WHERE id = :id';
-    $arr = [];
-    $arr[':id'] = $id;
-    $rows_object = new SqlExecutor();
-    $rows = $rows_object->select($sql, $arr);
-    $row = reset($rows);
-  } catch (Exception $e) {
-    $error = $e->getMessage();
-  }
-} elseif ( !empty(filter_input(INPUT_POST, 'id')) ) {
-  try {
-    $id = filter_input(INPUT_POST, 'id');
-    $sql = 'DELETE FROM user_data WHERE id = :id';
-    $arr = [];
-    $arr[':id'] = $id;
-    $lastInsertId = new SqlExecutor();
-    $lastInsertId->common($sql, $arr);
-
-    $url = "http://localhost/php/original_app/signup.php";
-    header("Location:" . $url);
-    exit();
-  } catch (Exception $e) {
-    $error = $e->getMessage();
-  }
+  $error = $e->getMessage();
 }
 
 ?>
@@ -54,7 +34,7 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
   <link href="assets/css/add.css" rel="stylesheet" />
   <title>Login</title>
 </head>
-<body class="dlete">
+<body class="index">
 <div class="wrapper">
     <div class="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <!--
@@ -67,7 +47,7 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
         </a></div>
       <div class="sidebar-wrapper ps-container ps-theme-default" data-ps-id="54c5e70f-1292-ed79-06c8-ac070c19f468">
         <ul class="nav">
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="./index.php">
               <i class="material-icons">dashboard</i>
               <p>Dashboard</p>
@@ -79,19 +59,19 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
               <p>結果の登録または編集</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item ">
             <a class="nav-link" href="http://localhost/php/original_app/result.php?id=<?= h($row['id']); ?>">
               <i class="material-icons">phone_iphone</i>
               <p>結果の確認</p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item ">
             <a class="nav-link" href="http://localhost/php/original_app/logout.php">
               <i class="material-icons">undo</i>
               <p>ログアウト</p>
             </a>
           </li>
-          <li class="nav-item active-pro active">
+          <li class="nav-item active-pro">
             <a class="nav-link" href="http://localhost/php/original_app/delete.php?id=<?= h($row['id']); ?>">
               <i class="material-icons">delete</i>
               <p>退会</p>
@@ -105,7 +85,7 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container-fluid">
           <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:;">退会</a>
+            <a class="navbar-brand" href="javascript:;">Dashboard</a>
           </div>
           <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
@@ -129,10 +109,9 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
             <div class="col-md-6">
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">退会について</h4>
+                  <h4 class="card-title">アプリの使い方</h4>
                   <p class="card-text">
-                    このアプリを退会しますか？<br>
-                    退会する場合は退会ボタンをクリックしてください。
+                    アプリの使い方の説明を入力する。
                   </p>
                 </div>
               </div>
@@ -140,20 +119,19 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
           </div>
           <div class="row">
             <div class="col-md-6">
-              <form class="delete" action="" method="post">
-              <div class="form-group">
-                <h4>登録内容</h4>
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title"><?= h($row['name']); ?>さん専用 質問URL</h4>
+                  <p class="card-text">
+                    下記の表示されているURLをコピーするか、<br>
+                    クリップボードをクリックしてコピーしてください。
+                  </p>
+                  <p id="copyTarget" class="card-text">
+                    http://localhost/php/original_app/question.php?id=<?= h($row['id']); ?>
+                  </p>
+                  <button class="submit btn btn-warning" onclick="copyToClipboard()">URLをコピー</button>
+                </div>
               </div>
-              <div class="form-group">
-                <label for="name" class="bmd-label-floating">名前</label>
-                <input type="text" name="name" value="<?= h($row['name']); ?>" class="form-control" readonly>
-              </div>
-              <div class="form-group">
-              <input type="hidden" name="id" value=<?= $_GET['id']; ?>>
-              <input type="submit" name="btn_submit" value="退会" class="btn btn-warning">
-              <a class="btn_cancel btn btn-default" href="http://localhost/php/original_app/user-admin.php">戻る</a>
-              </div>
-              </form>
             </div>
           </div>
         </div>

@@ -146,4 +146,69 @@ form.delete .form-group:nth-child(1) {
     padding: 5px;
   }
 }
+
+.index {
+  background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #333;
+}
+
+.index .row {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.index .card .card-title {
+  text-align: center;
+}
+
+.index .btn-wrapper {
+  text-align: center;
+}
+
+.index .main-visula {
+  position: relative;
+  margin-top: 10px;
+}
+
+.index .main-visula img {
+  -webkit-filter: grayscale(100%) contrast(0.9);
+          filter: grayscale(100%) contrast(0.9);
+}
+
+.index .main-visula::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0.55;
+  background-image: linear-gradient(80deg, orange, #810000);
+}
+
+.index .card-desc {
+  margin-top: 10px;
+}
+
+.index .btn-wrapper {
+  margin-top: 10px;
+}
+
+.index .signup.btn {
+  margin-right: 10px;
+}
+
+.index .login.btn {
+  margin-left: 10px;
+}
+
+@media screen and (min-width: 1024px) {
+  .index {
+    min-height: 800px;
+  }
+}
 /*# sourceMappingURL=add.css.map */

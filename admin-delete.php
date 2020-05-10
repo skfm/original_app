@@ -15,7 +15,8 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
     $sql = 'SELECT * FROM user_data WHERE id = :id';
     $arr = [];
     $arr[':id'] = $id;
-    $rows = select($sql, $arr);
+    $rows_object = new SqlExecutor();
+    $rows = $rows_object->select($sql, $arr);
     $row = reset($rows);
   } catch (Exception $e) {
     $error = $e->getMessage();
@@ -26,7 +27,8 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
     $sql = 'DELETE FROM user_data WHERE id = :id';
     $arr = [];
     $arr[':id'] = $id;
-    $rows = delete($sql, $arr);
+    $lastInsertId = new SqlExecutor();
+    $lastInsertId->common($sql, $arr);
 
     $url = "http://localhost/php/original_app/admin.php";
     header("Location:" . $url);
@@ -139,12 +141,11 @@ if( !empty((filter_input(INPUT_GET, 'id')) && empty(filter_input(INPUT_POST, 'id
         </div>
       <footer class="footer">
         <div class="container-fluid">
-          <div class="copyright float-right">
+          <div class="copyright">
             ©
             <script>
               document.write(new Date().getFullYear())
-            </script> made with <i class="material-icons">favorite</i> by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
+            </script> made with <i class="material-icons">favorite</i> by Creative Maverick
           </div>
         </div>
       </footer>
