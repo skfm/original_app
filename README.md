@@ -33,5 +33,8 @@
 ## 使用技術
 
 -html  
--css  
+-css(scss, Bootstrap)  
+-JavaScript(jQuery)  
+-Google マテリアルアイコン  
+-Google Fonts  
 -PHP
