@@ -5,7 +5,8 @@ session_start();
 require_once(__DIR__ . '/common.php');
 
 if( empty($_SESSION['login_user']) || $_SESSION['login_user']['admin_flag'] != 1) {
-	header('Location: http://localhost/php/original_app/signup.php');
+  $url = $root_url . "signup.php";
+  header('Location:' . $url);
 }
 
 try {

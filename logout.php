@@ -14,5 +14,6 @@
   //セッションクリア
   @session_destroy();
 
-  header('Location: http://localhost/php/original_app/login.php');
+  $url = $root_url . "login.php";
+  header('Location:' . $url);
 ?>

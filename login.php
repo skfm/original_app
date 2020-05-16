@@ -32,7 +32,8 @@ if (filter_input(INPUT_SERVER, 'REQUEST_METHOD') === 'POST') {
     if (password_verify($password, $password_hash)) {
       session_regenerate_id(true);
       $_SESSION['login_user'] = $row;
-      header('Location: http://localhost/php/original_app/user-admin.php');
+      $url = $root_url . "user-admin.php";
+      header('Location:' . $url);
       exit();
     }
   }

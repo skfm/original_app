@@ -5,6 +5,8 @@ function h($s) {
     return htmlspecialchars($s, ENT_QUOTES, 'UTF-8');
 }
 
+// urlの変数化
+$root_url = "http://localhost/php/original_app/";
 
 // データベースに接続
 // @return \PDO
@@ -131,9 +133,8 @@ function img_text_register() {
         $rows->common($sql, $arr);
     }
 
-
-    $url = "http://localhost/php/original_app/user-admin.php";
-    header("Location:" . $url);
+    $url = $root_url . "user-admin.php";
+    header('Location:' . $url);
     exit();
 }
 
